@@ -1,11 +1,11 @@
-import 'package:practice1/person.dart';
-import 'person.dart';
+import 'package:practice1/container/person.dart';
+import '../container/person.dart';
 
-class PersonList {
+class PersonListService {
   final _person = <Person>[];
 
   void add(String name, int age) {
-    Person newPerson = Person(name, age, getCurrentListId());
+    Person newPerson = Person(name, age, _getCurrentListId());
     _person.add(newPerson);
   }
 
@@ -19,7 +19,7 @@ class PersonList {
     return newPerson;
   }
 
-  int getCurrentListId() {
+  int _getCurrentListId() {
     return _person.length + 1;
   }
 }

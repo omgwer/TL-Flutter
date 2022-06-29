@@ -1,40 +1,27 @@
-import 'package:practice1/person.dart';
-import 'dart:io';
-import 'package:practice1/person_list.dart';
+import 'package:practice1/service/app_service.dart';
 
 void main() {
-  stdout.write('Enter your name:');
-  final name = stdin.readLineSync();
-  stdout.writeln();
   bool _isRun = true;
-  final personList = PersonList();
-  while (_isRun) {
-    stdout.writeln('Command for this app:');
-    stdout.writeln('-Add:');
-    stdout.writeln('-Remove:');
-    stdout.writeln('-GetInfo:');
-    stdout.writeln('-Exit:');
+  AppService.printInfo();
 
-    final command = stdin.readLineSync() ?? '';
+  while (_isRun) {
+    final command = AppService.getComand();
 
     switch (command) {
-      case 'Add':
-        stdout.writeln('Input age and name for add:');
-        final name = stdin.readLineSync() ?? '';
-        final int age = int.parse(stdin.readLineSync() ?? '');
-        personList.add(name, age);
+      case 'add':
+        AppService.addPerson();
         break;
-      case 'Remove':
-        stdout.writeln('Input person id for remove:');
-        final int id = int.parse(stdin.readLineSync() ?? '');
-        personList.remove(id);
+      case 'remove':
+        AppService.removePerson();
         break;
-      case 'GetInfo':
-        final int id = int.parse(stdin.readLineSync() ?? '');
-        personList.getPersonInfo(id);
+      case 'getinfo':
+        AppService.getPersonInfo();
         break;
-      case 'Exit':
+      case 'exit':
         _isRun = false;
+        break;
+      case 'help':
+        AppService.printInfo();
         break;
     }
   }
